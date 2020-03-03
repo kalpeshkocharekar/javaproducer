@@ -29,6 +29,9 @@ public class sqlproducer {
 
            Statement stmt  =  con.createStatement();
            ResultSet rs = stmt.executeQuery("select * from name");
+           System.out.println(rs.toString());
+
+
            while(rs.next()) {
                System.out.println("the value is " + rs.getString(1));
 
@@ -38,7 +41,8 @@ public class sqlproducer {
 
                // create a producer record
                ProducerRecord<String,String> record =
-                       new ProducerRecord<String, String>("first_topic", rs.getString(1)+rs.getString(2));
+                       new ProducerRecord<String, String>
+                               ("first_topic", rs.getString(1)+","+rs.getString(2));
 
                // send data - asynchronous
                producer.send(record);

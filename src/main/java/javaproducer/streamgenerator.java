@@ -86,13 +86,10 @@ public class streamgenerator {
     private static JsonNode newBalance(JsonNode transaction, JsonNode balance) {
         // create a new balance json object
         ObjectNode newBalance = JsonNodeFactory.instance.objectNode();
-        newBalance.put("count", balance.get("count").asInt() + 1);
-        newBalance.put("balance", balance.get("balance").asInt() + transaction.get("amount").asInt());
+        newBalance.put("count", balance.get("id").asInt() + 1);
+        newBalance.put("balance", balance.get("name").asText()+"append");
 
-        Long balanceEpoch = Instant.parse(balance.get("time").asText()).toEpochMilli();
-        Long transactionEpoch = Instant.parse(transaction.get("time").asText()).toEpochMilli();
-        Instant newBalanceInstant = Instant.ofEpochMilli(Math.max(balanceEpoch, transactionEpoch));
-        newBalance.put("time", newBalanceInstant.toString());
+        //newBalance.put("time", newBalanceInstant.toString());
         return newBalance;
     }
 }

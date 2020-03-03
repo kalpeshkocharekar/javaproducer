@@ -35,7 +35,7 @@ public class sqlproducer {
             Connection con = DriverManager.getConnection(url);
 
            Statement stmt  =  con.createStatement();
-           ResultSet rs = stmt.executeQuery("select * from name");
+           ResultSet rs = stmt.executeQuery("select * from raw_data");
            System.out.println(rs.toString());
 
 

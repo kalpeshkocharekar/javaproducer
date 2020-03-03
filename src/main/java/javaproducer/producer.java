@@ -10,6 +10,7 @@ import java.util.Properties;
 
 public class producer {
     final static String bootstrapServers = "127.0.0.1:9092";
+    final static String zookeeperservers= "127.0.0.1:2181";
     public static void main(String[] args) {
         System.out.println("hello");
         Properties properties = new Properties();

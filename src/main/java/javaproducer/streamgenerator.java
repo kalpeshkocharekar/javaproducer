@@ -11,11 +11,17 @@ import org.apache.kafka.common.config.Config;
 import org.apache.kafka.common.serialization.*;
 import org.apache.kafka.connect.json.JsonDeserializer;
 import org.apache.kafka.connect.json.JsonSerializer;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
+import org.apache.kafka.streams.kstream.KTable;
 
+import javax.sound.midi.Soundbank;
+import java.lang.ref.SoftReference;
 import java.sql.*;
+import java.time.Instant;
+import java.util.Arrays;
 import java.util.Properties;
 
 
@@ -41,6 +47,40 @@ public class streamgenerator {
         KStream<String, JsonNode> bankTransactions =
                 builder.stream(Serdes.String(), jsonSerde, "first_topic");
 
+        ObjectNode initialBalance = JsonNodeFactory.instance.objectNode();
+        initialBalance.put("count", 0);
+        initialBalance.put("balance", 0);
+        initialBalance.put("time", Instant.ofEpochMilli(0L).toString());
+
+        KTable<String,JsonNode> proccesstable = bankTransactions
+                .groupByKey(Serdes.String(), jsonSerde)
+                .aggregate(
+                        () -> initialBalance,
+                        (key, transaction, balance) -> newBalance(transaction, balance),
+                        jsonSerde,
+                        "bank-balance-agg"
+                );
+
+
+
+
+
+
+
+    }
+
+
+    private static JsonNode newBalance(JsonNode transaction, JsonNode balance) {
+        // create a new balance json object
+        ObjectNode newBalance = JsonNodeFactory.instance.objectNode();
+        newBalance.put("count", balance.get("count").asInt() + 1);
+        newBalance.put("balance", balance.get("balance").asInt() + transaction.get("amount").asInt());
+
+        Long balanceEpoch = Instant.parse(balance.get("time").asText()).toEpochMilli();
+        Long transactionEpoch = Instant.parse(transaction.get("time").asText()).toEpochMilli();
+        Instant newBalanceInstant = Instant.ofEpochMilli(Math.max(balanceEpoch, transactionEpoch));
+        newBalance.put("time", newBalanceInstant.toString());
+        return newBalance;
     }
 }
 

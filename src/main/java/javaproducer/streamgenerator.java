@@ -85,7 +85,7 @@ public class streamgenerator {
 //        newBalance.put("balance", balance.get("name").asText()+"append");
 
         //newBalance.put("time", newBalanceInstant.toString());
-        newBalance.put("inserted from stream","valued from stream")
+        newBalance.put("inserted from stream","valued from stream");
         return newBalance;
     }
 }

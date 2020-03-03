@@ -57,6 +57,8 @@ public class sqlproducer {
                // send data - asynchronous
                producer.send(record);
 
+               Thread.sleep(10000);
+
                // flush data
                //producer.flush();
                // flush and close producer
@@ -66,7 +68,9 @@ public class sqlproducer {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
     }
 }
 

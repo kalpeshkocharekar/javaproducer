@@ -18,7 +18,7 @@ public class sqlproducer {
     final static String bootstrapServers = "127.0.0.1:9092";
     final static String zookeeperservers= "127.0.0.1:2181";
     public static void main(String[] args) {
-        System.out.println("hello");
+
         Properties properties = new Properties();
 
 
@@ -52,7 +52,7 @@ public class sqlproducer {
                // create a producer record
                ProducerRecord<String,String> record =
                        new ProducerRecord<String, String>
-                               ("first_topic",rs.getString(1), transaction.toString());
+                               ("kstream",rs.getString(1), transaction.toString());
 
                // send data - asynchronous
                producer.send(record);

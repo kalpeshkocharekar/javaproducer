@@ -11,6 +11,7 @@ import org.apache.kafka.common.config.Config;
 import org.apache.kafka.common.serialization.*;
 import org.apache.kafka.connect.json.JsonDeserializer;
 import org.apache.kafka.connect.json.JsonSerializer;
+import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
@@ -60,6 +61,17 @@ public class streamgenerator {
                         jsonSerde,
                         "bank-balance-agg"
                 );
+        proccesstable.to(Serdes.String(), jsonSerde,"bank-balance-exactly-once");
+
+        KafkaStreams streams = new KafkaStreams(builder, config);
+        streams.cleanUp();
+        streams.start();
+
+        // print the topology
+        System.out.println(streams.toString());
+
+        // shutdown hook to correctly close the streams application
+        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
 
 
 

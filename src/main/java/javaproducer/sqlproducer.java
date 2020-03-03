@@ -65,7 +65,7 @@ public class sqlproducer {
                // send data - asynchronous
                producer.send(record);
 
-               Thread.sleep(1000);
+               Thread.sleep(2000);
 
                // flush data
                //producer.flush();

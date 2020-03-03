@@ -58,7 +58,7 @@ public class sqlproducer {
                producer.send(record);
 
                // flush data
-               producer.flush();
+               //producer.flush();
                // flush and close producer
                producer.close();
            }

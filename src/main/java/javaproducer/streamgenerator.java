@@ -47,7 +47,7 @@ public class streamgenerator {
 
         KStream<String, JsonNode> bankTransactions =
                 builder.stream(Serdes.String(), jsonSerde, "kstream");
-        //check
+        System.out.println("read Kstream");
 
         ObjectNode initialBalance = JsonNodeFactory.instance.objectNode();
         initialBalance.put("count", 0);

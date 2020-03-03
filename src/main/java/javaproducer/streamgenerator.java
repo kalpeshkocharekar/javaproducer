@@ -33,7 +33,7 @@ public class streamgenerator {
     public static void main(String[] args) {
         Properties config = new Properties();
 
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG,"aggegrate function");
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG,"aggegrate-function");
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 

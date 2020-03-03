@@ -48,7 +48,15 @@ public class sqlproducer {
                ObjectNode transaction = JsonNodeFactory.instance.objectNode();
 
                transaction.put("id",rs.getString(1));
-               transaction.put("name",rs.getString(2));
+               transaction.put("client_name",rs.getString(2));
+               transaction.put("client_code",rs.getString(3));
+               transaction.put("Longitude",rs.getString(4));
+               transaction.put("revenue",rs.getString(5));
+               transaction.put("location",rs.getString(6));
+               transaction.put("year",rs.getString(7));
+               transaction.put("Sector",rs.getString(8));
+               transaction.put("Major_business",rs.getString(9));
+               transaction.put("nasdaq_site",rs.getString(10));
                // create a producer record
                ProducerRecord<String,String> record =
                        new ProducerRecord<String, String>

@@ -75,11 +75,6 @@ public class streamgenerator {
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
 
 
-
-
-
-
-
     }
 
 
@@ -87,7 +82,7 @@ public class streamgenerator {
         // create a new balance json object
         ObjectNode newBalance = JsonNodeFactory.instance.objectNode();
         newBalance.put("count", balance.get("id").asInt() + 1);
-        newBalance.put("balance", balance.get("name").asText()+"append");
+//        newBalance.put("balance", balance.get("name").asText()+"append");
 
         //newBalance.put("time", newBalanceInstant.toString());
         return newBalance;

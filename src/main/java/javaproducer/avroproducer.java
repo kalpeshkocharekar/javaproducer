@@ -63,8 +63,9 @@ public class avroproducer {
                        "{\"name\": \"year\", \"type\":\"string\"]" +
                        "{\"name\": \"Sector\", \"type\":\"string\"]" +
                        "{\"name\": \"Major_business\", \"type\":\"string\"]" +
-                       "{\"name\": \"nasdaq_site\", \"type\":\"string\"]" +
-                       "}";
+                       "{\"name\": \"nasdaq_site\", \"type\":\"string\"}" +
+                       "]";
+
 
                Schema.Parser parser = new Schema.Parser();
                Schema schema = parser.parse(schemaString);

@@ -65,7 +65,7 @@ public class cdv2dbinsert {
                 statement.setString(8,Sector);
                 statement.setString(9,Major_business);
                 statement.setString(10,nasdaq_site);
-
+                Thread.sleep(5000);
                 System.out.println(nasdaq_site);
                 statement.addBatch();
 
@@ -92,6 +92,8 @@ public class cdv2dbinsert {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

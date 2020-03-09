@@ -6,14 +6,12 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+
 import java.sql.*;
-
 import java.util.Properties;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class sqlproducer {
+public class avroproducer {
 
     final static String bootstrapServers = "3.6.250.221:9092";
     final static String zookeeperservers= "127.0.0.1:2181";
@@ -24,8 +22,9 @@ public class sqlproducer {
 
 
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroSerializer");
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroSerializer");
+        properties.setProperty("schema.registry.url", "http://localhost:8081");
 
 
 

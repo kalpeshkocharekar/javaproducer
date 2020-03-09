@@ -87,7 +87,7 @@ public class avroproducer {
                // create a producer record
                ProducerRecord<String,GenericRecord> record =
                        new ProducerRecord<String, GenericRecord>
-                               ("kstream",rs.getString(1), transaction);
+                               ("avrotopic",rs.getString(1), transaction);
 
                // send data - asynchronous
                producer.send(record);

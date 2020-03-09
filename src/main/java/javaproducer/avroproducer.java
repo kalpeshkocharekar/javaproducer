@@ -56,13 +56,13 @@ public class avroproducer {
                        "\"fields\": [" +
                        "{\"name\": \"id\", \"type\": \"int\"}," +
                        "{\"name\": \"client_name\", \"type\": \"string\"}," +
-                       "{\"name\": \"client_code\", \"type\":\"string\"}" +
-                       "{\"name\": \"Longitude\", \"type\":\"string\"}" +
-                       "{\"name\": \"revenue\", \"type\":\"string\"}" +
-                       "{\"name\": \"location\", \"type\":\"string\"}" +
-                       "{\"name\": \"year\", \"type\":\"string\"}" +
-                       "{\"name\": \"Sector\", \"type\":\"string\"}" +
-                       "{\"name\": \"Major_business\", \"type\":\"string\"]" +
+                       "{\"name\": \"client_code\", \"type\":\"string\"}," +
+                       "{\"name\": \"Longitude\", \"type\":\"string\"}," +
+                       "{\"name\": \"revenue\", \"type\":\"string\"}," +
+                       "{\"name\": \"location\", \"type\":\"string\"}," +
+                       "{\"name\": \"year\", \"type\":\"string\"}," +
+                       "{\"name\": \"Sector\", \"type\":\"string\"}," +
+                       "{\"name\": \"Major_business\", \"type\":\"string\"}," +
                        "{\"name\": \"nasdaq_site\", \"type\":\"string\"}" +
                        "]}";
 

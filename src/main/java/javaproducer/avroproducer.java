@@ -2,6 +2,9 @@ package javaproducer;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericData;
+import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -44,8 +47,29 @@ public class avroproducer {
 
 
                // create the producer
-               KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
-               ObjectNode transaction = JsonNodeFactory.instance.objectNode();
+               KafkaProducer<String, GenericRecord> producer = new KafkaProducer<String, GenericRecord>(properties);
+
+
+
+               String schemaString = "{\"namespace\": \"customerManagement.avro\",\"type\": \"record\", " +
+                       "\"name\": \"Customer\"," +
+                       "\"fields\": [" +
+                       "{\"name\": \"id\", \"type\": \"int\"}," +
+                       "{\"name\": \"client_name\", \"type\": \"string\"}," +
+                       "{\"name\": \"client_code\", \"type\":\"string\"]" +
+                       "{\"name\": \"Longitude\", \"type\":\"string\"]" +
+                       "{\"name\": \"revenue\", \"type\":\"string\"]" +
+                       "{\"name\": \"location\", \"type\":\"string\"]" +
+                       "{\"name\": \"year\", \"type\":\"string\"]" +
+                       "{\"name\": \"Sector\", \"type\":\"string\"]" +
+                       "{\"name\": \"Major_business\", \"type\":\"string\"]" +
+                       "{\"name\": \"nasdaq_site\", \"type\":\"string\"]" +
+                       "}";
+
+               Schema.Parser parser = new Schema.Parser();
+               Schema schema = parser.parse(schemaString);
+
+               GenericRecord transaction = new GenericData.Record(schema);
 
                transaction.put("id",rs.getString(1));
                transaction.put("client_name",rs.getString(2));
@@ -58,9 +82,9 @@ public class avroproducer {
                transaction.put("Major_business",rs.getString(9));
                transaction.put("nasdaq_site",rs.getString(10));
                // create a producer record
-               ProducerRecord<String,String> record =
-                       new ProducerRecord<String, String>
-                               ("kstream",rs.getString(1), transaction.toString());
+               ProducerRecord<String,GenericRecord> record =
+                       new ProducerRecord<String, GenericRecord>
+                               ("kstream",rs.getString(1), transaction);
 
                // send data - asynchronous
                producer.send(record);
